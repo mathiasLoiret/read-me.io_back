@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/alvinberthelot/read-me.io_back/issues"
   },
-  "homepage": "https://github.com/alvinberthelot/read-me.io_back#readme"
+  "homepage": "https://github.com/alvinberthelot/read-me.io_back#readme",
+  "dependencies": {
+    "express": "4.16.2"
+  }
 }
