@@ -4,7 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "mocha --timeout 15000 test/"
+  },
+  "dependencies": {
+    "express": "4.16.2"
+  },
+  "devDependencies": {
+    "chai": "4.1.2",
+    "mocha": "4.1.0",
+    "superagent": "3.8.2"
   },
   "repository": {
     "type": "git",
@@ -16,8 +25,5 @@
   "bugs": {
     "url": "https://github.com/alvinberthelot/read-me.io_back/issues"
   },
-  "homepage": "https://github.com/alvinberthelot/read-me.io_back#readme",
-  "dependencies": {
-    "express": "4.16.2"
-  }
+  "homepage": "https://github.com/alvinberthelot/read-me.io_back#readme"
 }
