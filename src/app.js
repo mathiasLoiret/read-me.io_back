@@ -14,6 +14,14 @@ app.get('/api/health', function(req, res) {
   res.sendStatus(200);
 });
 
+app.get('/api/generate', function(req, res) {
+  res.status(200);
+  res.setHeader('Content-Type', 'application/json');
+  generate(req.query, resContent => {
+  	res.end(JSON.stringify(resContent))
+  })
+});
+
 app.get('/api/extensions', function(req, res) {
   res.setHeader('Content-Type', 'application/json')
   fs.readdir('./src/templates/', function(err, content) {
