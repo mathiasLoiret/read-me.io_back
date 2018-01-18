@@ -2,7 +2,6 @@ const express = require('express');
 const fs = require('fs');
 const app = express();
 const readline =require('readline');
-var fs = require('fs');
 const templatePath = "src/templates"
 
 app.use(express.static('public'));
