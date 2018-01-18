@@ -11,4 +11,8 @@ app.get('/api/health', function(req, res) {
   res.sendStatus(200);
 });
 
+app.get('/api/generate', function(req, res) {
+  res.sendStatus(200);
+});
+
 module.exports = app
