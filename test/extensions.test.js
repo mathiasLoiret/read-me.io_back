@@ -16,7 +16,7 @@ describe('Project Root --> /', function() {
     instance.close();
   });
 
-  describe('GET', function() {
+  describe.skip('GET', function() {
     it(`GIVEN ${urlAPI}
         WHEN send GET request
         THEN should return 'Hello Ynov'`, function(done) {
@@ -27,6 +27,6 @@ describe('Project Root --> /', function() {
           done()
         })
     })
-  }).skip()
+  })
 
 })
