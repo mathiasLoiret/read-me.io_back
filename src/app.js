@@ -9,10 +9,20 @@ app.get('/', function(req, res) {
 
 app.get('/api/health', function(req, res) {
   res.sendStatus(200);
+  res.
 });
 
 app.get('/api/generate', function(req, res) {
-  res.sendStatus(200);
+  res.status(200);
+  res.end(generate("default"))
 });
 
 module.exports = app
+
+function generate(data){
+	return getfile()
+}
+
+function getfile(fileName){
+	return "fileLoad : " + fileName
+}
