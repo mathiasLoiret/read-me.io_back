@@ -1,5 +1,7 @@
 const express = require('express');
 const app = express();
+var fs = require('fs');
+const templatePath = "src/templates"
 
 app.use(express.static('public'));
 
@@ -13,15 +15,43 @@ app.get('/api/health', function(req, res) {
 
 app.get('/api/generate', function(req, res) {
   res.status(200);
-  res.end(generate(req.query))
+  res.setHeader('Content-Type', 'application/json');
+  res.end(JSON.stringify(generate(req.query)))
 });
 
 module.exports = app
 
 function generate(data){
-	return getfile(JSON.stringify(data))
+	var resObj = {}
+	resObj["template"] = getTemplate(data.template)
+	resObj["ext"] = getExt(data.ext)
+	resObj["file"] = getfile(resObj["ext"] + "/" + resObj["template"]+'.'+resObj["ext"])
+	return resObj
 }
 
-function getfile(fileName){
-	return "fileLoad : " + fileName
+function getfile(filePath){
+
+ /*fs.readFile(`templates/${filePath}`, 'utf8', function(err, data) {
+    if(err){
+      console.log('error');
+    }
+    console.log('content  ' + data );
+    return data ;
+  });*/
+ return fs.readFileSync(`${templatePath}/${filePath}`).toString();
+}
+
+function getTemplate(value){
+	if(value == undefined){
+		return "basic"
+	}
+	return value
+}
+
+function getExt(value){
+	if(value == undefined){
+		return "asciidoc"
+	}
+	return value
+
 }
