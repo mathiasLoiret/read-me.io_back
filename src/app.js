@@ -13,15 +13,35 @@ app.get('/api/health', function(req, res) {
 
 app.get('/api/generate', function(req, res) {
   res.status(200);
-  res.end(generate(req.query))
+  res.setHeader('Content-Type', 'application/json');
+  res.end(JSON.stringify(generate(req.query)))
 });
 
 module.exports = app
 
 function generate(data){
-	return getfile(JSON.stringify(data))
+	var resObj = {}
+	resObj["template"] = getExt(data.template)
+	resObj["ext"] = getExt(data.ext)
+	resObj["file"] = getfile(resObj["ext"] + "/" + resObj["template"])
+	return resObj
 }
 
 function getfile(fileName){
 	return "fileLoad : " + fileName
+}
+
+function getTemplate(value){
+	if(value == undefined){
+		return "asciidoc"
+	}
+	return value
+}
+
+function getExt(value){
+	if(value == undefined){
+		return "basic"
+	}
+	return value
+
 }
