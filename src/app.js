@@ -34,7 +34,7 @@ function generate(data, callback){
 	})
 }
 
-function getfile(filePath){
+function getfile(filePath, callback){
 
  /*fs.readFile(`templates/${filePath}`, 'utf8', function(err, data) {
     if(err){
@@ -43,7 +43,13 @@ function getfile(filePath){
     console.log('content  ' + data );
     return data ;
   });*/
- return fs.readFileSync(`${templatePath}/${filePath}`).toString();
+   fs.readFile(`${templatePath}/${filePath}`, function(err, data) {
+      if(err){
+        console.log('error');
+      }
+      console.log('content  ' + data );
+      callback(data.toString())
+    });
 }
 
 function getTemplate(value){
