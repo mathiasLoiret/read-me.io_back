@@ -9,18 +9,17 @@ app.get('/', function(req, res) {
 
 app.get('/api/health', function(req, res) {
   res.sendStatus(200);
-  res.
 });
 
 app.get('/api/generate', function(req, res) {
   res.status(200);
-  res.end(generate("default"))
+  res.end(generate(req.query))
 });
 
 module.exports = app
 
 function generate(data){
-	return getfile(data)
+	return getfile(JSON.stringify(data))
 }
 
 function getfile(fileName){
