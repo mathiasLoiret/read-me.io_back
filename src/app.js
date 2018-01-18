@@ -2,7 +2,6 @@ const express = require('express');
 const fs = require('fs');
 const app = express();
 const readline =require('readline');
-var fs = require('fs');
 const templatePath = "src/templates"
 
 app.use(express.static('public'));
@@ -24,7 +23,7 @@ app.get('/api/extensions', function(req, res) {
     for(var i=0; i<content.length; i++) {
       listExtensions.push(content[i]);
     }
-    var extension = { extensions: listExtensions }
+    var extension = { extensions: listExtensions}
     res.send(JSON.stringify(extension));
   })
 })
@@ -49,7 +48,7 @@ app.get('/api/generate', function(req, res) {
   generate(req.query, resContent => {
   	res.end(JSON.stringify(resContent))
   })
-  
+
 });
 
 function generate(data, callback){
@@ -58,7 +57,7 @@ function generate(data, callback){
 	resObj["ext"] = getExt(data.ext)
 	getfile(resObj["ext"] + "/" + resObj["template"]+'.'+resObj["ext"], fileContent => {
 		resObj["file"] = fileContent
-		callback(resObj) 
+		callback(resObj)
 	})
 }
 
