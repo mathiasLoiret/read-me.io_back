@@ -2,6 +2,8 @@ const express = require('express');
 const fs = require('fs');
 const app = express();
 const readline =require('readline');
+var fs = require('fs');
+const templatePath = "src/templates"
 
 app.use(express.static('public'));
 
@@ -41,5 +43,47 @@ app.get('/api/templates', function(req, res) {
     res.send(JSON.stringify(template));
   })
 })
+app.get('/api/generate', function(req, res) {
+  res.status(200);
+  res.setHeader('Content-Type', 'application/json');
+  generate(req.query, resContent => {
+  	res.end(JSON.stringify(resContent))
+  })
+  
+});
+
+function generate(data, callback){
+	var resObj = {}
+	resObj["template"] = getTemplate(data.template)
+	resObj["ext"] = getExt(data.ext)
+	getfile(resObj["ext"] + "/" + resObj["template"]+'.'+resObj["ext"], fileContent => {
+		resObj["file"] = fileContent
+		callback(resObj) 
+	})
+}
+
+function getfile(filePath, callback){
+   fs.readFile(`${templatePath}/${filePath}`, function(err, data) {
+      if(err){
+        console.log('error');
+      }
+      callback(data.toString())
+    });
+}
+
+function getTemplate(value){
+	if(value == undefined){
+		return "basic"
+	}
+	return value
+}
+
+function getExt(value){
+	if(value == undefined){
+		return "asciidoc"
+	}
+	return value
+
+}
 
 module.exports = app
