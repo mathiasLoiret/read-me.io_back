@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node index.js",
     "test": "mocha --timeout 15000 test/",
+    "production": "./production.sh",
     "lint": "eslint **/*.js"
+
   },
   "dependencies": {
     "express": "4.16.2"
