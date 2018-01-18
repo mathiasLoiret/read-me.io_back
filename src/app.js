@@ -21,7 +21,7 @@ module.exports = app
 
 function generate(data){
 	var resObj = {}
-	resObj["template"] = getExt(data.template)
+	resObj["template"] = getTemplate(data.template)
 	resObj["ext"] = getExt(data.ext)
 	resObj["file"] = getfile(resObj["ext"] + "/" + resObj["template"])
 	return resObj
