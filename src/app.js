@@ -15,6 +15,7 @@ app.get('/api/health', function(req, res) {
 });
 
 app.get('/api/extensions', function(req, res) {
+  res.setHeader('Content-Type', 'application/json')
   fs.readdir('./src/templates/', function(err, content) {
     if(err) {
       res.sendStatus(500);
@@ -29,6 +30,7 @@ app.get('/api/extensions', function(req, res) {
 })
 
 app.get('/api/templates', function(req, res) {
+  res.setHeader('Content-Type', 'application/json')
   fs.readdir('./src/templates/markdown/', function(err, contents) {
     if(err) {
       res.sendStatus(500);
