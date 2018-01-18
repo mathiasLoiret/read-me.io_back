@@ -1,6 +1,6 @@
-project.title
+${project.title}
 
-project.description
+${project.description}
 
 Getting started
 
