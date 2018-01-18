@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "test": "mocha --timeout 15000 test/",
-    "lint": "eslint app.js"
+    "lint": "eslint **/*.js"
   },
   "dependencies": {
     "express": "4.16.2"
