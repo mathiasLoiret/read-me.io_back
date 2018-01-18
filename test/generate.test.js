@@ -1,5 +1,6 @@
 const superagent = require('superagent');
 const expect = require('chai').expect;
+var fs = require('fs');
 
 let host = 'http://localhost:3000';
 let urlAPI = '/api/generate/'
@@ -28,16 +29,23 @@ describe('API generate --> /api/generate/', function() {
     })
   })
 
-  describe.skip('GET', function() {
+  describe('GET', function() {
     it(`GIVEN ${urlAPI} with parameters ext=asciidoc and template=basic
        WHEN send GET request THEN should return the gitignore
         write in asciicode for a basic project`, function(done) {
       superagent.get(`${host}${urlAPI}?ext=asciidoc&template=basic`)
         .end(function(e, res) {
-          expect(res.status).to.eql(200)
-          done()
+          fs.readFile('src/templates/asciidoc/basic.asciidoc', function(err, data) {
+            expect(res.status).to.eql(200)
+            resultat = JSON.parse(res.text);
+            expect(resultat.template).to.eql('basic')
+            expect(resultat.ext).to.eql('asciidoc')
+            expect(resultat.file).to.eql(data.toString())
+            done()
+          });
         })
     })
   })
+
 
 })
