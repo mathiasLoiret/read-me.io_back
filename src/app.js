@@ -20,7 +20,7 @@ app.get('/api/generate', function(req, res) {
 module.exports = app
 
 function generate(data){
-	return getfile()
+	return getfile(data)
 }
 
 function getfile(fileName){
