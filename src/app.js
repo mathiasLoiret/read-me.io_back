@@ -1,5 +1,7 @@
 const express = require('express');
 const app = express();
+var fs = require('fs');
+const templatePath = "templates"
 
 app.use(express.static('public'));
 
@@ -23,5 +25,18 @@ function generate(data){
 }
 
 function getfile(fileName){
-	return "fileLoad : " + fileName
+  let extension = fileName.ext;
+  let template = fileName.temp;
+  var content;
+  console.log('ext  '+ extension);
+  console.log('temp  '+ template);
+
+  fs.readFile(`template/${extension}/${template}.${extension}`, 'utf8', function(err, data) {
+    if(err){
+      console.log('error');
+    }
+    console.log('content  ' + data );
+    content = data;
+});
+	return "fileLoad : ";
 }
