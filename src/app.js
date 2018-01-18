@@ -16,17 +16,22 @@ app.get('/api/health', function(req, res) {
 app.get('/api/generate', function(req, res) {
   res.status(200);
   res.setHeader('Content-Type', 'application/json');
-  res.end(JSON.stringify(generate(req.query)))
+  generate(req.query, resContent => {
+  	res.end(JSON.stringify(resContent))
+  })
+  
 });
 
 module.exports = app
 
-function generate(data){
+function generate(data, callback){
 	var resObj = {}
 	resObj["template"] = getTemplate(data.template)
 	resObj["ext"] = getExt(data.ext)
-	resObj["file"] = getfile(resObj["ext"] + "/" + resObj["template"]+'.'+resObj["ext"])
-	return resObj
+	getfile(resObj["ext"] + "/" + resObj["template"]+'.'+resObj["ext"], fileContent => {
+		resObj["file"] = fileContent
+		callback(resObj) 
+	})
 }
 
 function getfile(filePath){
