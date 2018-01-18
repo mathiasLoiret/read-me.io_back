@@ -16,11 +16,11 @@ describe('API generate --> /api/generate/', function() {
     instance.close();
   });
 
-  describe('GET', function() {
-    it(`GIVEN ${urlAPI}
-        WHEN send GET request
-        THEN should return`, function(done) {
-      superagent.get(`${host}${urlAPI}`)
+  describe.skip('GET', function() {
+    it(`GIVEN ${urlAPI} with parameters ext=asciidoc and template=basic
+       WHEN send GET request THEN should return the gitignore
+        write in asciicode for a basic project`, function(done) {
+      superagent.get(`${host}${urlAPI}?ext=asciidoc&template=basic`)
         .end(function(e, res) {
           expect(res.status).to.eql(200)
           done()
