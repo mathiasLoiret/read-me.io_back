@@ -10,7 +10,7 @@ Python is required on your computer, you can check if it's already the case.
 
 	python --version
 
-If it's not you should follow instructions to [intall it on official website](https://www.python.org/downloads/).
+If it's not you should follow instructions to [install it on official website](https://www.python.org/downloads/).
 
 ### Installing
 
