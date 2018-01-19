@@ -67,5 +67,7 @@ infos.txt
 #lock
 package-lock.json
 
-
 # End of https://www.gitignore.io/api/node
+
+# Dist file generated while running production script
+dist/*
