@@ -2,7 +2,7 @@ const superagent = require('superagent');
 const expect = require('chai').expect;
 
 let host = 'http://localhost:3000';
-let urlAPI = '/'
+let urlAPI = '/api/version'
 
 describe('Project Root --> /', function() {
 
@@ -19,11 +19,11 @@ describe('Project Root --> /', function() {
   describe('GET', function() {
     it(`GIVEN ${urlAPI}
         WHEN send GET request
-        THEN should return 'Hello Ynov'`, function(done) {
+        THEN should return a JSON object with the version attribute `, function(done) {
       superagent.get(`${host}${urlAPI}`)
         .end(function(e, res) {
           expect(res.status).to.eql(200)
-          expect(res.text).to.equal('Hello Ynov')
+          expect(JSON.parse(res.text)).to.have.property('version')
           done()
         })
     })
