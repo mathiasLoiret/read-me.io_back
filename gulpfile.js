@@ -1,7 +1,7 @@
 var gulp = require('gulp');
 
 var paths = {
-  src: 'src/*',
+  src: 'src/**/*',
   index: 'index.js',
   packa: 'package.json',
   publi:'public/*',
@@ -11,7 +11,7 @@ var paths = {
 
 
 gulp.task('src', function () {
-  return gulp.src(paths.src).pipe(gulp.dest(paths.dist));
+  return gulp.src(paths.src, {base :'./'}).pipe(gulp.dest(paths.dist));
 });
 
 gulp.task('index', function () {
@@ -22,7 +22,7 @@ gulp.task('package', function () {
   return gulp.src(paths.packa).pipe(gulp.dest(paths.dist));
 });
 gulp.task('publi', function () {
-  return gulp.src(paths.publi).pipe(gulp.dest(paths.dist));
+  return gulp.src(paths.publi, {base :'./'}).pipe(gulp.dest(paths.dist));
 });
 
 
