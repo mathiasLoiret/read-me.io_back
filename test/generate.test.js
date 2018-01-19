@@ -1,9 +1,9 @@
 const superagent = require('superagent');
 const expect = require('chai').expect;
-const before  = require('chai').before;
-const after  = require('chai').after;
-const describe  = require('chai').describe;
-const it = require('chai').it;
+const before  = require('mocha').before;
+const after  = require('mocha').after;
+const describe  = require('mocha').describe;
+const it = require('mocha').it;
 
 var fs = require('fs');
 
