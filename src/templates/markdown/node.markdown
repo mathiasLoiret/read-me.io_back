@@ -14,7 +14,7 @@ If it's not you should follow instructions to [intall it on official website](ht
 
 ### Installing
 
-Please install dependencies first.
+Before to get started, you will have to install the node modules listed in the `package.json` by running :
 
 	npm install
 
@@ -32,6 +32,12 @@ To start program.
 
 ## Contributing
 
+	{project.contributors}
+
 ## Authors
 
+	{project.authors}
+
 ## License
+
+	{project.license}
