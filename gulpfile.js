@@ -9,9 +9,6 @@ var paths = {
 };
 
 
-gulp.task('default', function () {
-  console.log('Hello World!');
-});
 
 gulp.task('src', function () {
   return gulp.src(paths.src).pipe(gulp.dest(paths.dist));
