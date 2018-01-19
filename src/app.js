@@ -1,6 +1,7 @@
 const express = require('express');
 const fs = require('fs');
 const app = express();
+const cors = require('cors');
 const templatePath = 'src/templates';
 const pjson = require('./../package.json');
 
@@ -9,6 +10,12 @@ getTemplates((err, templates)=>{if(!err){tempList = templates;}});
 var extList = ['asciidoc'];
 getExtentions((err, extensions)=>{if(!err){extList = extensions;}});
 
+var corsOptions = {
+  methods:'GET',
+  allowedHeaders : 'Content-Type',
+  origin: '*'
+}
+app.use(cors(corsOptions));
 app.use(express.static('public'));
 
 app.get('/', function(req, res) {
@@ -68,7 +75,7 @@ app.get('/api/generate', function(req, res) {
 function generate(data, callback){
   var resObj = {};
   try {
-    resObj['template'] = getTemplate(data.template);
+    resObj['template'] = getTemplate(data.temp);
     resObj['ext'] = getExtention(data.ext);
 
     getfile(`${resObj['ext']}/${resObj['template']}.${resObj['ext']}`, (err, fileContent) => {
