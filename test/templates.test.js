@@ -23,7 +23,14 @@ describe('Project Root --> /', function() {
       superagent.get(`${host}${urlAPI}`)
         .end(function(e, res) {
           expect(res.status).to.eql(200)
-          expect(JSON.parse(res.text)).to.eql({templates:['basic','java','node']})
+          expect(JSON.parse(res.text)).to.eql({
+            templates: [
+              'basic',
+              'java',
+              'node',
+              'python'
+            ]
+          })
           done()
         })
     })

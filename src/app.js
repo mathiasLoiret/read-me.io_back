@@ -3,6 +3,7 @@ const fs = require('fs');
 const app = express();
 const readline =require('readline');
 const templatePath = "src/templates"
+const pjson = require('./../package.json');
 
 const tempList = ['basic','java','node'];
 const extList = ['asciidoc','markdown'];
@@ -20,7 +21,7 @@ app.get('/api/health', function(req, res) {
 app.get('/api/version', function(req, res) {
   res.status(200);
   res.setHeader('Content-Type', 'application/json')
-  res.end(JSON.stringify({version: JSON.parse(fs.readFileSync("package.json"))["version"]}))
+  res.end(JSON.stringify({version: pjson["version"]}))
 });
 
 app.get('/api/extensions', function(req, res) {
