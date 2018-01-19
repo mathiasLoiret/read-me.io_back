@@ -54,6 +54,31 @@ describe('API generate --> /api/generate/', function() {
         })
 
     })
+
+    it(`GIVEN ${urlAPI} with parameters ext=xxxx and template=basic
+      WHEN send GET request
+      THEN should return a 404`, function(done) {
+
+      superagent.get(`${host}${urlAPI}?ext=xxxx&template=basic`)
+        .end(function(e, res) {
+          expect(res.status).to.eql(404)
+          expect(JSON.parse(res.text)).to.eql({err:'unreconized extension'})
+          done()
+        })
+    })
+    
+    it(`GIVEN ${urlAPI} with parameters ext=asciidoc and template=xxxx
+      WHEN send GET request
+      THEN should return a 404`, function(done) {
+
+      superagent.get(`${host}${urlAPI}?ext=asciidoc&template=xxxx`)
+        .end(function(e, res) {
+          expect(res.status).to.eql(404)
+          expect(JSON.parse(res.text)).to.eql({err:'unreconized template'})
+          done()
+        })
+    })
+
   })
 
 
