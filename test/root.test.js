@@ -1,8 +1,12 @@
 const superagent = require('superagent');
 const expect = require('chai').expect;
+const before  = require('chai').before;
+const after  = require('chai').after;
+const describe  = require('chai').describe;
+const it = require('chai').it;
 
 let host = 'http://localhost:3000';
-let urlAPI = '/'
+let urlAPI = '/';
 
 describe('Project Root --> /', function() {
 
@@ -17,16 +21,12 @@ describe('Project Root --> /', function() {
   });
 
   describe('GET', function() {
-    it(`GIVEN ${urlAPI}
-        WHEN send GET request
-        THEN should return 'Hello Ynov'`, function(done) {
-      superagent.get(`${host}${urlAPI}`)
-        .end(function(e, res) {
-          expect(res.status).to.eql(200)
-          expect(res.text).to.equal('Hello Ynov')
-          done()
-        })
-    })
-  })
-
-})
+    it(`GIVEN ${urlAPI} WHEN send GET request THEN should return 'Hello Ynov'`, function(done) {
+      superagent.get(`${host}${urlAPI}`).end(function(e, res) {
+        expect(res.status).to.eql(200);
+        expect(res.text).to.equal('Hello Ynov');
+        done();
+      });
+    });
+  });
+});
