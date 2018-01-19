@@ -71,7 +71,7 @@ describe('API generate --> /api/generate/', function() {
             done();
           });
       });
-    
+
     it(`GIVEN ${urlAPI} with parameters ext=asciidoc and template=xxxx
       WHEN send GET request
       THEN should return a 404`, function(done) {
