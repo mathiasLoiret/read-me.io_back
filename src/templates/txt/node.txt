@@ -1,19 +1,31 @@
-${project.title}
+{project.title}
 
-${project.description}
+{project.description}
 
 Getting started
 
 Prerequisites
+  Node.js is required on your computer, you can check if it's already the case.
+
+  	node -version
 
 Installing
+  Before to get started, you will have to install the node modules listed in the package.json by running :
+
+  npm install
 
 Running the tests
+  To run the unit test of the projet, run :
+
+  npm test
 
 Usage
 
 Contributing
+  {project.contributors}
 
 Authors
+  {project.authors}
 
 License
+  {project.license}
