@@ -5,8 +5,10 @@ const readline =require('readline');
 const templatePath = "src/templates"
 const pjson = require('./../package.json');
 
-const tempList = ['basic','java','node'];
-const extList = ['asciidoc','markdown'];
+var tempList = ['basic','java','node'];
+getTemplates((err, templates)=>{if(!err){tempList = templates}})
+var extList = ['asciidoc','markdown'];
+getExtentions((err, extensions)=>{if(!err){extList = extensions}})
 
 app.use(express.static('public'));
 
