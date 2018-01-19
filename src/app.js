@@ -18,7 +18,7 @@ app.get('/api/health', function(req, res) {
 app.get('/api/version', function(req, res) {
   res.status(200);
   res.setHeader('Content-Type', 'application/json')
-  res.end(JSON.stringify({version: pjson["version"]}))
+  res.end(JSON.stringify({ version: pjson.version }))
 });
 
 app.get('/api/extensions', function(req, res) {
