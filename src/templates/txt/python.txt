@@ -6,14 +6,24 @@ Getting started
 
 Prerequisites
 
+Python is required on your computer, you can check if it's already the case.
+
+	python --version
+
+If it's not you should follow instructions to https://www.python.org/downloads/.
+
 Installing
 
-Running the tests
+Please install dependencies first.
 
-Usage
+	pip install
 
-Contributing
+ Running the tests
 
-Authors
+ Usage
 
-License
+ Contributing
+
+ Authors
+
+ License
