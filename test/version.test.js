@@ -1,5 +1,9 @@
 const superagent = require('superagent');
 const expect = require('chai').expect;
+const before  = require('chai').before;
+const after  = require('chai').after;
+const describe  = require('chai').describe;
+const it = require('chai').it;
 
 let host = 'http://localhost:3000';
 let urlAPI = '/api/version'
