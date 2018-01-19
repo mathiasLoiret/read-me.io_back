@@ -69,7 +69,7 @@ app.get('/api/generate', function(req, res) {
 function generate(data, callback){
 	var resObj = {}
   try {
-    resObj['template'] = getTemplate(data.temp);
+    resObj['template'] = getTemplate(data.template);
   	resObj['ext'] = getExtention(data.ext);
 
     getfile(`${resObj['ext']}/${resObj['template']}.${resObj['ext']}`, (err, fileContent) => {
