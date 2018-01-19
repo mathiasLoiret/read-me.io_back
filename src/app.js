@@ -14,7 +14,7 @@ var corsOptions = {
   methods:'GET',
   allowedHeaders : 'Content-Type',
   origin: '*'
-}
+};
 app.use(cors(corsOptions));
 app.use(express.static('public'));
 
