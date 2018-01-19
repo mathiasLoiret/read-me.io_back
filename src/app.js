@@ -5,9 +5,9 @@ const readline =require('readline');
 const templatePath = "src/templates"
 const pjson = require('./../package.json');
 
-var tempList = ['basic','java','node'];
+var tempList = ['basic'];
 getTemplates((err, templates)=>{if(!err){tempList = templates}})
-var extList = ['asciidoc','markdown'];
+var extList = ['asciidoc'];
 getExtentions((err, extensions)=>{if(!err){extList = extensions}})
 
 app.use(express.static('public'));
@@ -64,7 +64,6 @@ app.get('/api/generate', function(req, res) {
     }
 
   })
-
 });
 
 function generate(data, callback){
@@ -94,7 +93,6 @@ function getfile(filePath, callback){
       }else{
         callback(undefined, data.toString());
       }
-
     });
 }
 
