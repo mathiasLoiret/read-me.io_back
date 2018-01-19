@@ -1,0 +1,29 @@
+= ${project.title}
+
+${project.description}
+
+== Getting started
+
+=== Prerequisites
+
+Python is required on your computer, you can check if it's already the case.
+
+	python --version
+
+If it's not you should follow instructions to https://www.python.org/downloads/.
+
+=== Installing
+
+Please install dependencies first.
+
+	pip install
+
+== Running the tests
+
+== Usage
+
+== Contributing
+
+== Authors
+
+== License
