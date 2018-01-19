@@ -5,6 +5,9 @@ const readline =require('readline');
 const templatePath = "src/templates"
 const pjson = require('./../package.json');
 
+const tempList = ['basic','java','node'];
+const extList = ['asciidoc','markdown'];
+
 app.use(express.static('public'));
 
 app.get('/', function(req, res) {
@@ -50,28 +53,46 @@ app.get('/api/templates', function(req, res) {
 app.get('/api/generate', function(req, res) {
   res.status(200);
   res.setHeader('Content-Type', 'application/json');
-  generate(req.query, resContent => {
-  	res.end(JSON.stringify(resContent))
+  generate(req.query, (err, resContent) => {
+    if(err){
+      res.status(404);
+      res.end(JSON.stringify(err));
+    }else{
+      res.end(JSON.stringify(resContent))
+    }
+
   })
 
 });
 
 function generate(data, callback){
 	var resObj = {}
-	resObj["template"] = getTemplate(data.template)
-	resObj["ext"] = getExtention(data.ext)
-	getfile(resObj["ext"] + "/" + resObj["template"]+'.'+resObj["ext"], fileContent => {
-		resObj["file"] = fileContent
-		callback(resObj)
-	})
+  try {
+    resObj['template'] = getTemplate(data.temp);
+  	resObj['ext'] = getExtention(data.ext);
+
+    getfile(`${resObj['ext']}/${resObj['template']}.${resObj['ext']}`, (err, fileContent) => {
+      if(err){
+        callback(err,undefined);
+      }else{
+        resObj['file'] = fileContent;
+        callback(undefined,resObj);
+      }
+  	});
+
+  } catch (e) {
+    callback(e, undefined);
+  }
 }
 
 function getfile(filePath, callback){
-   fs.readFile(`${templatePath}/${filePath}`, function(err, data) {
+   fs.readFile(`${templatePath}/${filePath}`, (err, data) =>{
       if(err){
-        console.log('error');
+        callback(err, undefined);
+      }else{
+        callback(undefined, data.toString());
       }
-      callback(data.toString())
+
     });
 }
 
@@ -91,9 +112,11 @@ function getTemplates(callback){
 
 function getTemplate(value){
 	if(value == undefined){
-		return "basic"
+		return 'basic';
+	}else if(tempList.indexOf(value) != -1 ){
+		return value;
 	}
-	return value
+	throw {err:'unreconized template'}
 }
 
 function getExtentions(callback){
@@ -112,9 +135,11 @@ function getExtentions(callback){
 
 function getExtention(value){
 	if(value == undefined){
-		return "asciidoc"
+		return 'asciidoc';
+	}else if(extList.indexOf(value) != -1 ){
+		return value;
 	}
-	return value
+	throw {err:'unreconized extension'};
 }
 
 module.exports = app
