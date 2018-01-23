@@ -5,10 +5,10 @@ const after  = require('mocha').after;
 const describe  = require('mocha').describe;
 const it = require('mocha').it;
 
-let host = 'http://localhost:3000';
-let urlAPI = '/api/health/';
+const host = 'http://localhost:3000';
+const urlAPI = '/api/health/';
 
-describe('API health --> /api/health/', function() {
+describe('API health', function() {
 
   let app = require('../src/app.js');
   let instance;
@@ -21,11 +21,15 @@ describe('API health --> /api/health/', function() {
   });
 
   describe('GET', function() {
-    it(`GIVEN ${urlAPI} WHEN send GET request THEN should return 200`, function(done) {
-      superagent.get(`${host}${urlAPI}`).end(function(e, res) {
-        expect(res.status).to.eql(200);
-        done();
+    it(`GIVEN ${urlAPI}
+        WHEN send GET request
+        THEN should return 200`,
+      function(done) {
+        superagent.get(`${host}${urlAPI}`).end(function(e, res) {
+          expect(res.status).to.eql(200);
+          done();
+        });
       });
-    });
   });
+
 });

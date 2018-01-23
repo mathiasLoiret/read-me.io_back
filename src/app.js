@@ -18,10 +18,6 @@ var corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.static('public'));
 
-app.get('/', function(req, res) {
-  res.send('Hello Ynov');
-});
-
 app.get('/api/health', function(req, res) {
   res.sendStatus(200);
 });
@@ -79,9 +75,9 @@ function generate(data, callback){
     resObj['ext'] = getExtention(data.ext);
 
     getfile(`${resObj['ext']}/${resObj['template']}.${resObj['ext']}`, (err, fileContent) => {
-      if(err){
+      if(err) {
         callback(err,undefined);
-      }else{
+      } else {
         resObj['file'] = fileContent;
         callback(undefined,resObj);
       }
@@ -122,7 +118,7 @@ function getTemplate(value){
   }else if(tempList.indexOf(value) != -1 ){
     return value;
   }
-  throw {err:'unreconized template'};
+  throw {err:'unrecognized template'};
 }
 
 function getExtentions(callback){
@@ -145,7 +141,7 @@ function getExtention(value){
   }else if(extList.indexOf(value) != -1 ){
     return value;
   }
-  throw {err:'unreconized extension'};
+  throw {err:'unrecognized extension'};
 }
 
 module.exports = app;
