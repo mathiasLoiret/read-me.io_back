@@ -74,13 +74,12 @@ function generate(data, callback){
     resObj['template'] = getTemplate(data.template);
     resObj['ext'] = getExtention(data.ext);
 
-    getfile(`${templatePath}/${resObj['ext']}/${resObj['template']}.${resObj['ext']}`, (err, fileContent) => {
+    getfile(`${resObj['ext']}/${resObj['template']}.${resObj['ext']}`, (err, fileContent) => {
       if(err) {
         callback(err,undefined);
       } else {
-        resObj['file'] = fileContent.split('.isRequired').join('');
-        resObj['var_project'] = generateJsonTemplate(fileContent)
-        callback(undefined, resObj);
+        resObj['file'] = fileContent;
+        callback(undefined,resObj);
       }
     });
 
@@ -90,7 +89,7 @@ function generate(data, callback){
 }
 
 function getfile(filePath, callback){
-  fs.readFile(filePath, (err, data) =>{
+  fs.readFile(`${templatePath}/${filePath}`, (err, data) =>{
     if(err){
       callback(err, undefined);
     }else{
@@ -143,19 +142,6 @@ function getExtention(value){
     return value;
   }
   throw {err:'Value submitted for parameter extension is not recognized, the value should be one these : '+ extList};
-}
-
-function generateJsonTemplate(stringTemplate){
-	return JSON.stringify( 
-		stringTemplate.split('${')
-			.map(value => value.split('}')[0]
-				.split('.')).slice(1)
-					.map(tagList => {return {
-						name : tagList[1],
-						description : tagList[1] + ' of your ' +  tagList[0],
-						match: '${' + tagList[0] + '.' +  tagList[1] + '}',
-						required : tagList.length > 2
-	}}))
 }
 
 module.exports = app;

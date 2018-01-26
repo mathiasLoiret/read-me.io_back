@@ -24,12 +24,6 @@ Please install dependencies first.
 
 ## Contributing
 
-	${project.contributors}
-
 ## Authors
 
-	${project.authors}
-
 ## License
-
-	${project.license}

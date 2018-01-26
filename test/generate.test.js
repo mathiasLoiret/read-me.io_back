@@ -46,12 +46,10 @@ describe('API generate', function() {
               expect(resultat).to.eql({
                 ext: 'asciidoc',
                 template: 'basic',
-                file: data.toString().split('.isRequired').join(''),
-                var_project: "[{\"name\":\"title\",\"description\":\"title of your project\",\"match\":\"${project.title}\",\"required\":true},{\"name\":\"description\",\"description\":\"description of your project\",\"match\":\"${project.description}\",\"required\":false},{\"name\":\"contributors\",\"description\":\"contributors of your project\",\"match\":\"${project.contributors}\",\"required\":false},{\"name\":\"authors\",\"description\":\"authors of your project\",\"match\":\"${project.authors}\",\"required\":false},{\"name\":\"license\",\"description\":\"license of your project\",\"match\":\"${project.license}\",\"required\":false}]"
+                file: data.toString()
               });
               done();
             });
-            
           });
       });
 
@@ -69,7 +67,7 @@ describe('API generate', function() {
           });
       }
     );
-
+    
     it(`GIVEN ${urlAPI}
         WHEN send GET request with parameters ext=asciidoc and template=xxxx
         THEN should return a 400`,
