@@ -24,21 +24,21 @@ describe('API generate', function() {
 
   describe('GET', function() {
     it(`GIVEN ${urlAPI}
-        WHEN send GET request
-        THEN should return 200`,
+      WHEN send GET request
+      THEN should return 200`,
       function(done) {
         superagent.get(`${host}${urlAPI}`)
-          .end(function(e, res) {
-            expect(res.status).to.eql(200);
-            done();
-          });
+        .end(function(e, res) {
+          expect(res.status).to.eql(200);
+          done();
+        });
       });
 
-    it(`GIVEN ${urlAPI}
+      it(`GIVEN ${urlAPI}
         WHEN send GET request with parameters ext=asciidoc and template=basic
         THEN should fetch the readme in asciidoc format for a basic project`,
-      function(done) {
-        superagent.get(`${host}${urlAPI}?ext=asciidoc&template=basic`)
+        function(done) {
+          superagent.get(`${host}${urlAPI}?ext=asciidoc&template=basic`)
           .end(function(e, res) {
             fs.readFile('src/templates/asciidoc/basic.asciidoc', function(err, data) {
               var resultat = JSON.parse(res.text);
@@ -51,35 +51,72 @@ describe('API generate', function() {
               });
               done();
             });
-            
-          });
-      });
 
-    it(`GIVEN ${urlAPI}
-        WHEN send GET request with parameters ext=xxxx and template=basic
-        THEN should return a 400`,
-      function(done) {
-        superagent.get(`${host}${urlAPI}?ext=xxxx&template=basic`)
-          .end(function(e, res) {
-            expect(res.status).to.eql(400);
-            expect(JSON.parse(res.text)).to.eql({
-              err:'Value submitted for parameter extension is not recognized, the value should be one these : asciidoc,markdown,txt'
+          });
+        });
+
+        it(`GIVEN ${urlAPI}
+          WHEN send GET request with parameters ext=xxxx and template=basic
+          THEN should return a 400`,
+          function(done) {
+            superagent.get(`${host}${urlAPI}?ext=xxxx&template=basic`)
+            .end(function(e, res) {
+              expect(res.status).to.eql(400);
+              expect(JSON.parse(res.text)).to.eql({
+                err:'Value submitted for parameter extension is not recognized, the value should be one these : asciidoc,markdown,txt'
+              });
+              done();
             });
-            done();
-          });
-      }
-    );
+          }
+        );
 
-    it(`GIVEN ${urlAPI}
-        WHEN send GET request with parameters ext=asciidoc and template=xxxx
-        THEN should return a 400`,
-      function(done) {
-        superagent.get(`${host}${urlAPI}?ext=asciidoc&template=xxxx`)
-          .end(function(e, res) {
-            expect(res.status).to.eql(400);
-            expect(JSON.parse(res.text)).to.eql({err:'Value submitted for parameter template is not recognized, the value should be one these : basic,csharp,java,node,python'});
-            done();
+        it(`GIVEN ${urlAPI}
+          WHEN send GET request with parameters ext=asciidoc and template=xxxx
+          THEN should return a 400`,
+          function(done) {
+            superagent.get(`${host}${urlAPI}?ext=asciidoc&template=xxxx`)
+            .end(function(e, res) {
+              expect(res.status).to.eql(400);
+              expect(JSON.parse(res.text)).to.eql({err:'Value submitted for parameter template is not recognized, the value should be one these : basic,csharp,java,node,python'});
+              done();
+            });
           });
-      });
-  });
-});
+
+          it(`GIVEN ${urlAPI}
+            WHEN send GET request with one parameters ext=txt
+            THEN should return an txt\\basic template`,
+            function(done) {
+              superagent.get(`${host}${urlAPI}?ext=txt`)
+              .end(function(e, res) {
+                fs.readFile('src/templates/txt/basic.txt', function(err, data) {
+                  var resultat = JSON.parse(res.text);
+                  expect(res.status).to.eql(200);
+                  expect(JSON.parse(res.text)).to.contain({
+                    ext: 'txt',
+                    template: 'basic',
+                  });
+                  done();
+                });
+              });
+            });
+
+            it(`GIVEN ${urlAPI}
+              WHEN send GET request with one parameters template=java
+              THEN should return an asciidoc\\java template`,
+              function(done) {
+                superagent.get(`${host}${urlAPI}?template=java`)
+                .end(function(e, res) {
+                  fs.readFile('src/templates/asciidoc/java.asciidoc', function(err, data) {
+                    var resultat = JSON.parse(res.text);
+                    expect(res.status).to.eql(200);
+                    expect(JSON.parse(res.text)).to.contain({
+                      ext: 'asciidoc',
+                      template: 'java',
+                    });
+                    done();
+                  });
+                });
+              });
+
+            });
+          });
