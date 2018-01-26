@@ -13,7 +13,10 @@ ${project.description}
 == Usage
 
 == Contributing
+${project.contributors}
 
 == Authors
+${project.authors}
 
 == License
+${project.license}
