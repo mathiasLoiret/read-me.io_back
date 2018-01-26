@@ -59,7 +59,7 @@ app.get('/api/generate', function(req, res) {
   res.setHeader('Content-Type', 'application/json');
   generate(req.query, (err, resContent) => {
     if(err){
-      res.status(404);
+      res.status(400);
       res.end(JSON.stringify(err));
     }else{
       res.end(JSON.stringify(resContent));
@@ -118,7 +118,7 @@ function getTemplate(value){
   }else if(tempList.indexOf(value) != -1 ){
     return value;
   }
-  throw {err:'unrecognized template'};
+  throw {err:'Value submitted for parameter template is not recognized, the value should be one these : '+ tempList};
 }
 
 function getExtentions(callback){
@@ -141,7 +141,7 @@ function getExtention(value){
   }else if(extList.indexOf(value) != -1 ){
     return value;
   }
-  throw {err:'unrecognized extension'};
+  throw {err:'Value submitted for parameter extension is not recognized, the value should be one these : '+ extList};
 }
 
 module.exports = app;
