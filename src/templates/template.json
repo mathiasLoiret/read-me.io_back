@@ -1,8 +1,5 @@
 {
-  template: 'basic',
-  extension: 'asciidoc',
-  file: 'blabla',
-  var_generic: [{
+  var_project: [{
       name: 'title',
       description: 'Title of your project',
       match: '$x{project.title}',

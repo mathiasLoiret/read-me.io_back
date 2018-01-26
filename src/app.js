@@ -79,7 +79,15 @@ function generate(data, callback){
         callback(err,undefined);
       } else {
         resObj['file'] = fileContent;
-        callback(undefined,resObj);
+        getfile('template.json', (err, fileContent) => {
+          if(err) {
+		    callback(err,undefined);
+		  } else {
+		  	resObj['var_project'] = fileContent['var_project'];
+		  	console.log(JSON.parse(fileContent)['var_project'])
+		    callback(undefined, resObj);
+		  }
+        })  
       }
     });
 
