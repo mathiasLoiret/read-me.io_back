@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-= ${project.title}
-=======
 = ${project.title.isRequired}
->>>>>>> 96dc143c5c65979e0a966a7c929df74840849a02
 
 ${project.description}
 

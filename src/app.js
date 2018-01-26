@@ -74,17 +74,16 @@ function generate(data, callback){
     resObj['template'] = getTemplate(data.template);
     resObj['ext'] = getExtention(data.ext);
 
-    getfile(`${resObj['ext']}/${resObj['template']}.${resObj['ext']}`, (err, fileContent) => {
+    getfile(`${templatePath}/${resObj['ext']}/${resObj['template']}.${resObj['ext']}`, (err, fileContent) => {
       if(err) {
         callback(err,undefined);
       } else {
         resObj['file'] = fileContent;
-        getfile('template.json', (err, fileContent) => {
+        getfile('src/template.json', (err, fileContent) => {
           if(err) {
 		    callback(err,undefined);
 		  } else {
-		  	resObj['var_project'] = fileContent['var_project'];
-		  	console.log(JSON.parse(fileContent)['var_project'])
+		  	resObj['var_project'] = JSON.parse(fileContent)['var_project'];
 		    callback(undefined, resObj);
 		  }
         })  
@@ -97,7 +96,7 @@ function generate(data, callback){
 }
 
 function getfile(filePath, callback){
-  fs.readFile(`${templatePath}/${filePath}`, (err, data) =>{
+  fs.readFile(filePath, (err, data) =>{
     if(err){
       callback(err, undefined);
     }else{

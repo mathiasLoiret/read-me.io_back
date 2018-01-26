@@ -1,0 +1,31 @@
+{
+  "var_project": 
+  [
+    {
+      "name": "title",
+      "description": "Title of your project",
+      "match": "$x{project.title}",
+      "required": true
+    }, {
+      "name": "description",
+      "description": "Description of your project",
+      "match": "${project.description}",
+      "required": false
+    }, {
+      "name": "contributors",
+      "description": "Contributors of your project",
+      "match": "${project.contributors}",
+      "required": false
+    }, {
+      "name": "authors",
+      "description": "Authors of your project",
+      "match": "${project.authors}",
+      "required": true
+    }, {
+      "name": "license",
+      "description": "License of your project",
+      "match": "${project.license}",
+      "required": false
+    }
+  ] 
+}
