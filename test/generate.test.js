@@ -55,13 +55,13 @@ describe('API generate', function() {
 
     it(`GIVEN ${urlAPI}
         WHEN send GET request with parameters ext=xxxx and template=basic
-        THEN should return a 404`,
+        THEN should return a 400`,
       function(done) {
         superagent.get(`${host}${urlAPI}?ext=xxxx&template=basic`)
           .end(function(e, res) {
-            expect(res.status).to.eql(404);
+            expect(res.status).to.eql(400);
             expect(JSON.parse(res.text)).to.eql({
-              err:'unrecognized extension'
+              err:'Value submitted for parameter extension is not recognized, the value should be one these : asciidoc,markdown,txt'
             });
             done();
           });
@@ -70,12 +70,12 @@ describe('API generate', function() {
 
     it(`GIVEN ${urlAPI}
         WHEN send GET request with parameters ext=asciidoc and template=xxxx
-        THEN should return a 404`,
+        THEN should return a 400`,
       function(done) {
         superagent.get(`${host}${urlAPI}?ext=asciidoc&template=xxxx`)
           .end(function(e, res) {
-            expect(res.status).to.eql(404);
-            expect(JSON.parse(res.text)).to.eql({err:'unrecognized template'});
+            expect(res.status).to.eql(400);
+            expect(JSON.parse(res.text)).to.eql({err:'Value submitted for parameter template is not recognized, the value should be one these : basic,csharp,java,node,python'});
             done();
           });
       });
