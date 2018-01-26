@@ -1,6 +1,6 @@
-= project.title
+= ${project.title.isRequired}
 
-project.description
+${project.description}
 
 == Getting started
 
