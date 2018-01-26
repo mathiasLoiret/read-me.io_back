@@ -79,14 +79,8 @@ function generate(data, callback){
         callback(err,undefined);
       } else {
         resObj['file'] = fileContent;
-        getfile('src/template.json', (err, fileContent) => {
-          if(err) {
-		    callback(err,undefined);
-		  } else {
-		  	resObj['var_project'] = JSON.parse(fileContent)['var_project'];
-		    callback(undefined, resObj);
-		  }
-        })  
+        resObj['var_project'] = generateJsonTemplate(fileContent)
+        callback(undefined, resObj);
       }
     });
 
@@ -149,6 +143,19 @@ function getExtention(value){
     return value;
   }
   throw {err:'Value submitted for parameter extension is not recognized, the value should be one these : '+ extList};
+}
+
+function generateJsonTemplate(stringTemplate){
+	return JSON.stringify( 
+		stringTemplate.split('${')
+			.map(value => value.split('}')[0]
+				.split('.')).slice(1)
+					.map(tagList => {return {
+						name : tagList[1],
+						description : tagList[1] + ' of your ' +  tagList[0],
+						match: '${' + tagList[0] + '.' +  tagList[1] + '}',
+						required : tagList.length > 2
+	}}))
 }
 
 module.exports = app;

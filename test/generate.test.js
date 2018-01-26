@@ -40,19 +40,17 @@ describe('API generate', function() {
       function(done) {
         superagent.get(`${host}${urlAPI}?ext=asciidoc&template=basic`)
           .end(function(e, res) {
-            fs.readFile('src/template.json', (err, templateFile) => {
-              fs.readFile('src/templates/asciidoc/basic.asciidoc', function(err, data) {
-                var resultat = JSON.parse(res.text);
-                expect(res.status).to.eql(200);
-                expect(resultat).to.eql({
-                  ext: 'asciidoc',
-                  template: 'basic',
-                  file: data.toString(),
-                  var_project: JSON.parse(templateFile.toString())['var_project']
-                });
-                done();
+            fs.readFile('src/templates/asciidoc/basic.asciidoc', function(err, data) {
+              var resultat = JSON.parse(res.text);
+              expect(res.status).to.eql(200);
+              expect(resultat).to.eql({
+                ext: 'asciidoc',
+                template: 'basic',
+                file: data.toString(),
+                var_project: "[{\"name\":\"title\",\"description\":\"title of your project\",\"match\":\"${project.title}\",\"required\":true},{\"name\":\"description\",\"description\":\"description of your project\",\"match\":\"${project.description}\",\"required\":false},{\"name\":\"contributors\",\"description\":\"contributors of your project\",\"match\":\"${project.contributors}\",\"required\":false},{\"name\":\"authors\",\"description\":\"authors of your project\",\"match\":\"${project.authors}\",\"required\":false},{\"name\":\"license\",\"description\":\"license of your project\",\"match\":\"${project.license}\",\"required\":false}]"
               });
-            })
+              done();
+            });
             
           });
       });
