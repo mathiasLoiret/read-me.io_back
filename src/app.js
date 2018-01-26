@@ -78,7 +78,7 @@ function generate(data, callback){
       if(err) {
         callback(err,undefined);
       } else {
-        resObj['file'] = fileContent;
+        resObj['file'] = fileContent.split('.isRequired').join('');
         resObj['var_project'] = generateJsonTemplate(fileContent)
         callback(undefined, resObj);
       }
