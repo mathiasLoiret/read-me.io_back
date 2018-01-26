@@ -14,6 +14,12 @@ ${project.description}
 
 ## Contributing
 
+	${project.contributors}
+
 ## Authors
 
+	${project.authors}
+
 ## License
+
+	${project.license}
